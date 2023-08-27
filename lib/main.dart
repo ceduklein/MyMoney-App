@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:senai_mymoney_app/src/modules/initial/page/initial_page.dart';
+import 'package:senai_mymoney_app/src/modules/personal_register/page/personal_register.dart';
 import 'package:senai_mymoney_app/src/modules/signin/page/signin_page.dart';
+import 'package:senai_mymoney_app/src/modules/signup/page/signup_page.dart';
 import 'package:senai_mymoney_app/src/router/app_router.dart';
 
 void main() {
@@ -24,6 +26,8 @@ class App extends StatelessWidget {
       darkTheme: ThemeData.dark(),
       routes: {
         AppRouter.login: (context) => const SignInPage(),
+        AppRouter.signup: (context) => const SignUpPage(),
+        AppRouter.personalRegister: (context) => const PersonalRegisterPage(),
       },
     );
   }
