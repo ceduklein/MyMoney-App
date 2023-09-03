@@ -15,7 +15,7 @@ class PersonalRegisterRepository {
 
   Future<Response<Map<String, dynamic>>> updateDataUser(
       String userId, UserUpdateModel userUpdate) async {
-    String url = "http://localhost:3099/user/update/$userId";
+    String url = "http://192.168.68.102:3099/user/update/$userId";
 
     Dio clientHTTP = await AppDio.getConnection(isAuth: true);
 
