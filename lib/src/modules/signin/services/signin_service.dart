@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:senai_mymoney_app/src/modules/signin/model/signin_model.dart';
 import 'package:senai_mymoney_app/src/modules/signin/repositories/signin_repository.dart';
@@ -36,7 +37,7 @@ class SignInService {
       String userId = userData['id'];
 
       AppSecureStorage.addItem(AppKeys.auth_token, token);
-      AppSecureStorage.addItem(AppKeys.user, userData.toString());
+      AppSecureStorage.addItem(AppKeys.user, jsonEncode(userData));
       AppSecureStorage.addItem(AppKeys.user_id, userId);
     }
   }

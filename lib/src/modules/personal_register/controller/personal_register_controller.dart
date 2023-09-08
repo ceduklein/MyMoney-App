@@ -48,7 +48,6 @@ abstract class _PersonalRegisterController with Store {
       limitValue = double.parse(limitValueController);
       isLoading = true;
       await sendData();
-      isLoading = false;
     } else {
       AppSnackbar.openMessage(
         context: buildContext,
