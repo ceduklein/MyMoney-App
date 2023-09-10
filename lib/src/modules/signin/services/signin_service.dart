@@ -46,4 +46,12 @@ class SignInService {
     final DioError errorResult = error as DioError;
     return errorResult.response!.data['statusCode'];
   }
+
+  Future<bool> verifyFirstAcess() async {
+    String? userId = await AppSecureStorage.readItem(AppKeys.user_id);
+
+    Response response = await repository.getGoal(userId!);
+
+    return response.data == '';
+  }
 }

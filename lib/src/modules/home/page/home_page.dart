@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    controller.loadData();
+    controller.loadData(context);
     super.initState();
   }
 
@@ -168,6 +168,9 @@ class _HomePageState extends State<HomePage> {
                               });
                             },
                             label: "Histórico",
+                          ),
+                          const SizedBox(
+                            height: 40,
                           )
                         ],
                       ),

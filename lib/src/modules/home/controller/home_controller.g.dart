@@ -141,8 +141,8 @@ mixin _$HomeController on _HomeController, Store {
       AsyncAction('_HomeController.loadData', context: context);
 
   @override
-  Future<void> loadData() {
-    return _$loadDataAsyncAction.run(() => super.loadData());
+  Future<void> loadData(BuildContext context) {
+    return _$loadDataAsyncAction.run(() => super.loadData(context));
   }
 
   @override

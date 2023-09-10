@@ -18,9 +18,11 @@ class HomeService {
       Response<List<dynamic>> responseList =
           await repository.getExpenses(userId!);
 
-      responseList.data?.forEach((response) {
-        expenses.add(ExpenseModel.fromJson(response));
-      });
+      if (responseList.data != null) {
+        responseList.data?.forEach((response) {
+          expenses.add(ExpenseModel.fromJson(response));
+        });
+      }
 
       return expenses;
     } catch (ex) {
@@ -33,18 +35,21 @@ class HomeService {
     try {
       String? userId = await AppSecureStorage.readItem(AppKeys.user_id);
 
-      Response<Map<String, dynamic>> response =
-          await repository.getGoal(userId!);
+      Response<dynamic> response = await repository.getGoal(userId!);
 
-      PersonalRegisterModel personalRegister =
-          PersonalRegisterModel.fromJson(response.data!);
+      if (response.data != '') {
+        PersonalRegisterModel personalRegister =
+            PersonalRegisterModel.fromJson(response.data!);
 
-      AppSecureStorage.addItem(
-        AppKeys.goal_value,
-        personalRegister.limitValue.toString(),
-      );
+        AppSecureStorage.addItem(
+          AppKeys.goal_value,
+          personalRegister.limitValue.toString(),
+        );
 
-      return personalRegister.limitValue;
+        return personalRegister.limitValue;
+      } else {
+        return 0.0;
+      }
     } catch (ex) {
       debugPrint(ex.toString());
       throw Exception(ex);

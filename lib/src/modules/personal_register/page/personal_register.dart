@@ -28,8 +28,7 @@ class _PersonalRegisterPageState extends State<PersonalRegisterPage> {
     controller.loadUser().then((user) {
       fullNameController.text = user.fullName;
       emailController.text = user.email;
-      limitValueController.text =
-          user.limitValue == null ? "0" : user.limitValue.toString();
+      limitValueController.text = user.limitValue.toString();
     });
   }
 
@@ -124,6 +123,32 @@ class _PersonalRegisterPageState extends State<PersonalRegisterPage> {
                                 decoration: const InputDecoration(
                                     label: Text("Limite de gastos")),
                               ),
+                              limitValueController.text == '0.0'
+                                  ? Padding(
+                                      padding: const EdgeInsets.only(top: 20),
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.9,
+                                        decoration: BoxDecoration(
+                                            color: const Color(0xFFE0E0E0),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(
+                                            "Informe seu limite de gastos",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Colors.green,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : Container(),
                               Padding(
                                 padding: const EdgeInsets.only(top: 20),
                                 child: AppButton(

@@ -16,6 +16,9 @@ abstract class _SigninController with Store {
   @observable
   bool isSuccess = false;
 
+  @observable
+  bool isFirstAcess = false;
+
   late String email;
   late String password;
   late BuildContext buildContext;
@@ -60,6 +63,11 @@ abstract class _SigninController with Store {
     result.containsKey('success')
         ? setSucess()
         : getException(result['exception']);
+  }
+
+  @action
+  Future<void> verifyFirstAcess() async {
+    isFirstAcess = await service.verifyFirstAcess();
   }
 
   @action

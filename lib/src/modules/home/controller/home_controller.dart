@@ -41,10 +41,10 @@ abstract class _HomeController with Store {
   int dayOfMonth = 1;
 
   @action
-  Future<void> loadData() async {
+  Future<void> loadData(BuildContext context) async {
+    goalValue = await _getGoalValue();
     expenses = await _getExpenses();
     accValue = await _getAccValue();
-    goalValue = await _getGoalValue();
     dailyExpenseBalance = await _getDailyExpenseBalance();
     plannedSpentBalance = await _getPlannedSpentBalance();
     expensesDay = await _getExpensesDay();
@@ -55,7 +55,9 @@ abstract class _HomeController with Store {
   Future<List<ExpenseModel>> _getExpenses() async {
     expenseList = await service.getExpenses();
 
-    return expenseList.getRange(0, 3).toList();
+    return expenseList
+        .getRange(0, expenseList.length >= 3 ? 3 : expenseList.length)
+        .toList();
   }
 
   Future<double> _getAccValue() async {
@@ -101,6 +103,7 @@ abstract class _HomeController with Store {
     AppSecureStorage.deleteItem(AppKeys.auth_token);
     AppSecureStorage.deleteItem(AppKeys.user_id);
     AppSecureStorage.deleteItem(AppKeys.user);
+    AppSecureStorage.deleteItem(AppKeys.goal_value);
 
     Navigator.of(context).pushReplacementNamed(
       AppRouter.login,

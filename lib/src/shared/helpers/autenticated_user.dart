@@ -9,10 +9,10 @@ class AuthenticatedUser {
 
     String? user = await AppSecureStorage.readItem(AppKeys.user);
 
+    if (user != null) userJson.addAll(jsonDecode(user));
+
     String goalValue =
         await AppSecureStorage.readItem(AppKeys.goal_value) ?? "0";
-
-    if (user != null) userJson.addAll(jsonDecode(user));
 
     userJson["limitValue"] = goalValue;
 

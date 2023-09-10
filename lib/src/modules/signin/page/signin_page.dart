@@ -45,7 +45,13 @@ class _SignInPageState extends State<SignInPage> {
         reaction((_) => controller.isSuccess, (bool success) async {
       if (success) {
         controller.setSucess();
-        await Navigator.of(context).pushNamed(AppRouter.home);
+        await controller.verifyFirstAcess();
+
+        controller.isFirstAcess
+            ? await Navigator.of(context).pushNamed(AppRouter.personalRegister)
+            : await Navigator.of(context)
+                .pushNamedAndRemoveUntil(AppRouter.home, (route) => false);
+
         controller.setLoading();
       }
     });

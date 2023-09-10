@@ -11,4 +11,12 @@ class SignInRepository {
 
     return clientHTTP.post(baseURL, data: signInData.toJson());
   }
+
+  Future<Response<dynamic>> getGoal(String userId) async {
+    String url = "http://192.168.68.111:3099/goal/findByUser/$userId";
+
+    Dio clientHTTP = await AppDio.getConnection(isAuth: true);
+
+    return await clientHTTP.get(url);
+  }
 }

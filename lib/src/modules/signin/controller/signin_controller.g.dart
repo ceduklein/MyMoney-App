@@ -41,6 +41,22 @@ mixin _$SigninController on _SigninController, Store {
     });
   }
 
+  late final _$isFirstAcessAtom =
+      Atom(name: '_SigninController.isFirstAcess', context: context);
+
+  @override
+  bool get isFirstAcess {
+    _$isFirstAcessAtom.reportRead();
+    return super.isFirstAcess;
+  }
+
+  @override
+  set isFirstAcess(bool value) {
+    _$isFirstAcessAtom.reportWrite(value, super.isFirstAcess, () {
+      super.isFirstAcess = value;
+    });
+  }
+
   late final _$checkDataAsyncAction =
       AsyncAction('_SigninController.checkData', context: context);
 
@@ -61,6 +77,14 @@ mixin _$SigninController on _SigninController, Store {
   @override
   Future<void> sendData() {
     return _$sendDataAsyncAction.run(() => super.sendData());
+  }
+
+  late final _$verifyFirstAcessAsyncAction =
+      AsyncAction('_SigninController.verifyFirstAcess', context: context);
+
+  @override
+  Future<void> verifyFirstAcess() {
+    return _$verifyFirstAcessAsyncAction.run(() => super.verifyFirstAcess());
   }
 
   late final _$_SigninControllerActionController =
@@ -103,7 +127,8 @@ mixin _$SigninController on _SigninController, Store {
   String toString() {
     return '''
 isLoading: ${isLoading},
-isSuccess: ${isSuccess}
+isSuccess: ${isSuccess},
+isFirstAcess: ${isFirstAcess}
     ''';
   }
 }
